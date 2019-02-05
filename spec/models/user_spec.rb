@@ -1,29 +1,30 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  subject(:user) { User.new(name: "Example User", email: "usEr@example.com") }
+  subject(:user) { User.new(name: "Example User", email: "usEr@example.com",
+                            password: "foobar", password_confirmation: "foobar") }
 
   describe "#new" do
     it "should be valid" do
       expect(user.valid?).to be_truthy
     end
 
-    it "should return false if name's blank" do
+    it "should return false if name is blank" do
       user.name = " "
       expect(user.valid?).to be_falsey
     end
 
-    it "should return false if email's blank" do
+    it "should return false if email is blank" do
       user.email = " "
       expect(user.valid?).to be_falsey
     end
 
-    it "should return false if name's too long (>50)" do
+    it "should return false if name is too long (>50)" do
       user.name = "a" * 51
       expect(user.valid?).to be_falsey
     end
 
-    it "should return false if email's too long (>255)" do
+    it "should return false if email is too long (>255)" do
       user.email = "a" * 244 + "@hotmail.com"
       expect(user.valid?).to be_falsey
     end
@@ -51,6 +52,16 @@ RSpec.describe User, type: :model do
       duplicate_user.email = user.email.upcase
       user.save
       expect(duplicate_user.valid?).to be_falsey
+    end
+
+    it "should return false if password is blank" do
+      user.password = user.password_confirmation = " "
+      expect(user.valid?).to be_falsey
+    end
+
+    it "should return false if password is too short (<6)" do
+      user.password = user.password_confirmation = "12345"
+      expect(user.valid?).to be_falsey
     end
   end
 end
