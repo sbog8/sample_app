@@ -12,8 +12,12 @@ require 'rails_helper'
 # end
 RSpec.describe ApplicationHelper, type: :helper do
   describe "ApplicationHelper" do
-    it "should return a correct full name" do
+    it "should return full title" do
       expect(full_title).to eq("Ruby on Rails Tutorial Sample App")
     end
+
+    it "should return page name and full title" do
+        expect(full_title("About")).to eq("About | Ruby on Rails Tutorial Sample App")
+      end
   end
 end
