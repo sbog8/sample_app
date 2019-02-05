@@ -14,4 +14,16 @@ RSpec.describe "UsersSignups", type: :request do
         assert_template 'users/new'
     end
   end
+  
+  it "should increase users count by 1 with a valid user" do
+    get '/signup'
+    expect do
+      post users_path, params: { user: { name:  "Example User",
+                                         email: "user@example.com",
+                                         password:              "password",
+                                         password_confirmation: "password" } }
+    end.to change{ User.count }.by(1)
+    follow_redirect!
+    assert_template 'users/show'
+  end
 end
