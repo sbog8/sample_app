@@ -9,10 +9,11 @@ RSpec.describe User, type: :model do
       expect(user.valid?).to be_truthy
     end
 
-    it "should return false if name is blank" do
-      user.name = " "
-      expect(user.valid?).to be_falsey
-    end
+    it { should validate_presence_of(:name) }
+    # it "should return false if name is blank" do
+    #   user.name = " "
+    #   expect(user.valid?).to be_falsey
+    # end
 
     it "should return false if email is blank" do
       user.email = " "
