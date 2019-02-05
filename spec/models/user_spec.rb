@@ -39,7 +39,7 @@ RSpec.describe User, type: :model do
 
     it "should be false with invalid address" do
       invalid_addresses = %w[user@example,com user_at_foo.org user.name@example.
-                           foo@bar_baz.com foo@bar+baz.com]
+                           foo@bar_baz.com foo@bar+baz.com foo@hi..com]
       invalid_addresses.each do |invalid_address|
         user.email = invalid_address
         expect(user.valid?).to be_falsey, "#{invalid_address.inspect} should be invalid"
