@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  subject(:user) { User.new(name: "Example User", email: "user@example.com") }
+  subject(:user) { User.new(name: "Example User", email: "usEr@example.com") }
 
   describe "#new" do
     it "should be valid" do
@@ -44,6 +44,13 @@ RSpec.describe User, type: :model do
         user.email = invalid_address
         expect(user.valid?).to be_falsey, "#{invalid_address.inspect} should be invalid"
       end
+    end
+
+    it "should return false if email isn't unique" do
+      duplicate_user = user.dup
+      duplicate_user.email = user.email.upcase
+      user.save
+      expect(duplicate_user.valid?).to be_falsey
     end
   end
 end
