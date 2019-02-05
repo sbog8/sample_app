@@ -22,5 +22,10 @@ RSpec.describe User, type: :model do
       user.name = "a" * 51
       expect(user.valid?).to be_falsey
     end
+
+    it "should return false if email's too long (>255)" do
+      user.email = "a" * 244 + "@hotmail.com"
+      expect(user.valid?).to be_falsey
+    end
   end
 end
