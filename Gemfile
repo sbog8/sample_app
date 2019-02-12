@@ -9,8 +9,11 @@ gem 'rails', '~> 5.2.2'
 gem 'jquery-rails', '4.3.1'
 # Fake users
 gem 'faker'
+# Paginate gem
+gem 'will_paginate', '3.1.6'
 # Bootstrap
 gem 'bootstrap-sass', '3.3.7'
+gem 'bootstrap-will_paginate', '1.0.0'
 # Bcrypt: hashing the password with bcrypt
 gem 'bcrypt'
 # Use postgresql as the database for Active Record
